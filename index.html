@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090c">
+  <meta name="description" content="Workflows n8n para prospecção B2B: pesquisa comercial, geração de leads no Google Maps, pontuação inteligente e mensagens com IA. Conheça os 3 templates.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Automações prontas para encontrar oportunidades de negócio">
+  <meta property="og:description" content="Três templates n8n de prospecção comercial. Conheça como funcionam, quais integrações usam e como configurar.">
+  <title>Templates n8n de Prospecção | Automação comercial com IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#08090c;--bg2:#0d0e13;--panel:#111319;--panel2:#17191f;--edge:#292b34;--text:#f7f7f9;--soft:#b6b7c2;--muted:#838590;--red:#fa3e49;--red-soft:#ff767c;--green:#6ddbb0}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:var(--bg);font:15px/1.58 'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}button,a{font:inherit}a{color:inherit;text-decoration:none}button{cursor:pointer}button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #ff8f95;outline-offset:4px}::selection{background:#f63b4b88;color:#fff}h1,h2,h3,h4,p{margin-top:0}h1,h2,h3,h4,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-.055em}h2{font-size:clamp(34px,4.6vw,60px);line-height:1.08}h3{letter-spacing:-.035em}p{color:var(--soft)}.container{width:min(1140px,calc(100% - 46px));margin-inline:auto}.section{padding:110px 0}.fine{font-size:12px;color:var(--muted)}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--red-soft);display:flex;gap:9px;align-items:center}.eyebrow:before{content:'';height:5px;width:5px;background:var(--red);border-radius:50%;box-shadow:0 0 15px var(--red)}.accent{color:var(--red)}.button{border:1px solid transparent;display:inline-flex;align-items:center;gap:16px;justify-content:center;padding:16px 24px;border-radius:9px;min-height:53px;font-size:13px;font-weight:800;letter-spacing:.005em;transition:transform .24s,background .24s,border-color .24s,box-shadow .24s;white-space:nowrap}.button:hover{transform:translateY(-2px)}.button.red{background:var(--red);color:#fff;box-shadow:0 11px 40px #ed34482b}.button.red:hover{background:#ff5660;box-shadow:0 14px 46px #ed34483e}.button.ghost{border-color:#373841;background:#ffffff08;color:#f6f6f8}.button.ghost:hover{border-color:#787a83;background:#ffffff11}.button .arr{font-size:21px;font-weight:400;line-height:.8}
+    .button:disabled{cursor:wait;opacity:.73;transform:none!important;box-shadow:none!important}
+    .checkout-toast{position:fixed;z-index:1100;bottom:24px;left:50%;transform:translateX(-50%);width:min(560px,calc(100% - 32px));padding:15px 19px;border-radius:10px;background:#242026;border:1px solid #92515a;color:#fff;box-shadow:0 15px 60px #000b;font-size:13px;text-align:center}
+    .checkout-toast[hidden]{display:none}
+    /* No top bar, navigation or logo by design. */
+    .hero{position:relative;padding:91px 0 92px;isolation:isolate;overflow:hidden;border-bottom:1px solid #ffffff0c}.hero:before{content:'';position:absolute;z-index:-1;inset:-70% -25% auto;top:-900px;height:1500px;background:radial-gradient(ellipse at 50% 67%,#b31d302c 0%,#7f18201c 21%,transparent 56%);pointer-events:none}.hero:after{content:'';position:absolute;z-index:-1;inset:0;background:radial-gradient(#d0d0d008 .75px,transparent 1px);background-size:27px 27px;mask-image:linear-gradient(90deg,transparent 6%,black 50%,transparent 94%)}.hero-copy{text-align:center;max-width:900px;margin:auto}.hero-chip{display:inline-flex;align-items:center;gap:10px;padding:9px 15px;border:1px solid #663038;border-radius:40px;background:#f3414a10;color:#ffafb4;letter-spacing:.08em;text-transform:uppercase;font-size:10px;font-weight:800}.hero-chip i{width:7px;height:7px;border-radius:100%;background:#f85766;box-shadow:0 0 0 4px #ff3d4920,0 0 15px #ff3d49}.hero h1{font-size:clamp(45px,7.6vw,94px);line-height:1.025;max-width:990px;margin:25px auto 21px;font-weight:700}.hero h1 em{font-style:normal;color:var(--red)}.hero-desc{max-width:680px;margin:0 auto;color:#b2b3be;font-size:clamp(15px,1.65vw,18px);line-height:1.83}.hero-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:29px 0 19px}.hero-meta{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:9px 21px;font-size:11px;color:#9c9ca8}.hero-meta span{display:inline-flex;align-items:center;gap:7px}.hero-meta span:before{content:'✓';color:var(--green);font-weight:900}
+    .demo-window{max-width:1030px;margin:60px auto 0;overflow:hidden;border:1px solid #3c2d34;border-radius:17px;background:#101117;box-shadow:0 28px 100px #000b,0 0 115px #d32c4022;text-align:left}.windowbar{height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid #ffffff10;background:#17181e}.traffic{display:flex;gap:7px}.traffic span{height:9px;width:9px;border-radius:100%;background:#fa5c60}.traffic span:nth-child(2){background:#f7c45e}.traffic span:nth-child(3){background:#6dd8a1}.window-title{font:11px 'DM Sans',sans-serif;letter-spacing:.02em;color:#81838e}.window-right{color:#8d909b;font:10px monospace}.flow-bg{background-color:#0f1015;background-image:radial-gradient(#ffffff16 .8px,transparent .8px);background-size:19px 19px}.canvas{padding:42px 40px 35px;overflow-x:auto}.flow-track{display:flex;align-items:center;gap:0;min-width:800px;justify-content:space-between}.flow-node{border:1px solid #3a3b49;border-radius:12px;background:#202129;position:relative;min-width:148px;max-width:148px;padding:14px;box-shadow:0 8px 26px #0009;min-height:122px}.flow-node:before{content:'';position:absolute;left:-4px;top:51%;width:7px;height:7px;background:#777b8d;border-radius:50%}.flow-node:after{content:'';position:absolute;right:-4px;top:51%;width:7px;height:7px;background:#777b8d;border-radius:50%}.flow-node .ni{width:34px;height:34px;background:#ffffff10;border-radius:9px;display:grid;place-items:center;font-size:17px;margin-bottom:10px}.flow-node:nth-of-type(3) .ni{background:#f03a4a22;color:#ff6875}.flow-node strong{font-size:11.5px;display:block;font-weight:800;line-height:1.25;letter-spacing:-.02em}.flow-node small{display:block;color:#868996;font-size:10px;margin-top:4px}.wire{height:2px;flex:1;background:linear-gradient(90deg,#4f545f,#ea4451);position:relative;min-width:30px}.wire:after{content:'';position:absolute;right:0;top:-4px;width:0;height:0;border-left:6px solid #ee4555;border-top:5px solid transparent;border-bottom:5px solid transparent}.preview-foot{display:flex;justify-content:space-between;gap:18px;border-top:1px solid #ffffff0d;padding:13px 21px;color:#878a95;font-size:11px}.live{color:var(--green)}.live:before{content:'●';font-size:8px;margin-right:7px}
+    .stack{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}.mini-stat{padding:23px 26px;background:#111218;border:1px solid #262831;border-radius:13px}.mini-stat b{font:700 27px 'Space Grotesk';letter-spacing:-.045em}.mini-stat b i{font-style:normal;color:var(--red)}.mini-stat p{font-size:12px;margin:3px 0 0;color:#9799a6}.intro{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:36px}.intro h2{margin:15px 0 0;max-width:780px}.intro p{max-width:345px;margin:0 0 5px;line-height:1.85;font-size:14px}.library{padding-top:100px}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}.product{border:1px solid #34343e;background:linear-gradient(165deg,#191b21,#111217 66%);border-radius:17px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .24s,transform .24s,box-shadow .24s}.product:hover{border-color:#88505a;transform:translateY(-4px);box-shadow:0 24px 44px #0006}.product.featured{border-color:#98434e;background:linear-gradient(165deg,#29191f,#141317 61%)}.product-top{padding:23px 23px 0;position:relative}.product-label{color:#9b9da9;font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:800}.product-label span{color:#fa6c75}.product-star{color:#ff9da4;background:#fa4b5422;padding:5px 9px;border:1px solid #ad485350;border-radius:4px;font-size:10px;font-weight:700}.product-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.flow-mini{margin:20px 0 20px;height:120px;border:1px solid #ffffff0c;border-radius:10px;background:#0e1015;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:15px}.flow-mini:before{content:'';inset:0;position:absolute;background-image:radial-gradient(#ffffff16 .8px,transparent .8px);background-size:13px 13px}.mini-flow-content{position:relative;display:flex;align-items:center;width:100%;justify-content:space-around;gap:7px}.mini-node{width:58px;height:59px;padding:7px 3px;border:1px solid #484955;border-radius:7px;background:#292a32;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;box-shadow:0 4px 9px #0008}.mini-node .emoji{font-size:18px;line-height:1}.mini-node span{font-size:8px;font-weight:800;color:#cccdd6}.mini-node.hot{border-color:#a74653;background:#3b242e}.mini-line{height:2px;background:linear-gradient(90deg,#777,#ff5c6a);flex:1;position:relative;max-width:20px;min-width:7px}.mini-line:after{position:absolute;content:'›';color:#ff5c6a;right:-1px;top:-13px;font-size:21px}.product-body{padding:0 23px 23px;display:flex;flex-direction:column;flex:1}.product h3{font-size:25px;line-height:1.12;min-height:57px;margin:0 0 13px}.product .desc{color:#adb0bb;font-size:13px;line-height:1.8;min-height:93px}.product ul{padding:0;margin:6px 0 22px;list-style:none}.product li{font-size:12.5px;display:flex;align-items:flex-start;gap:10px;color:#d7d7de;margin-bottom:10px}.product li:before{content:'✓';font-size:12px;font-weight:bold;color:#ff737d}.tech{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}.tech span{font:10px 'DM Sans';border:1px solid #3a3b45;border-radius:5px;padding:6px 8px;background:#ffffff05;color:#babbc4}.product-end{margin-top:23px;padding-top:21px;border-top:1px solid #ffffff13}.product-end .status{font-size:11px;color:#a2a5af;display:flex;align-items:center;gap:7px;margin-bottom:12px}.product-end .status:before{content:'';width:6px;height:6px;border-radius:50%;background:#f5a657}.product-end .button{width:100%}.detail-link{display:block;width:100%;border:0;background:transparent;color:#c6c7d0;font-size:12px;margin-top:11px;padding:5px;text-align:center}.detail-link:hover{color:#fff}.catalog-note{padding:16px 19px;margin-top:22px;background:#111218;border:1px solid #262831;border-radius:9px;font-size:12px;color:#979aa4;line-height:1.7}.catalog-note strong{color:#dedee4}
+    .separator{border-top:1px solid #ffffff10}.contrast{background:radial-gradient(ellipse at 87% 50%,#5f152120,transparent 50%),#0a0b0f}.benefit-layout{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}.benefit-layout h2{margin:15px 0 21px}.benefit-layout p{font-size:14px;line-height:1.9}.benefit-list{display:grid;gap:11px}.benefit{background:#17181f;border:1px solid #31323b;padding:19px 20px;border-radius:11px;display:flex;gap:15px;align-items:flex-start}.benefit-icon{width:37px;height:37px;flex:none;border-radius:9px;display:grid;place-items:center;background:#f43d4d18;border:1px solid #f43d4d34;color:#ff6875;font-size:19px}.benefit strong{font-size:14px;display:block;margin-bottom:4px}.benefit p{font-size:12px;color:#9a9ca6;margin:0;line-height:1.7}
+    .compare-wrap{overflow:auto;border:1px solid #34343e;border-radius:14px;margin-top:34px;background:#111218}.compare{width:100%;border-collapse:collapse;min-width:725px;text-align:left}.compare th,.compare td{padding:19px 19px;border-bottom:1px solid #292a33;font-size:12.5px;vertical-align:top}.compare th{font-size:12px;color:#fff;background:#1a1b22}.compare th:first-child{color:#a8a9b4}.compare td:first-child{color:#aaaeb9;width:28%}.compare td:not(:first-child){color:#e9e9ed}.compare tr:last-child td{border:0}.compare td.good{color:#9ae7c3}.table-note{margin:11px 0 0;font-size:11px;color:#868893}
+    .how{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}.how-card{padding:25px 16px 12px;border-top:1px solid #4c4d58}.how-card .number{font:700 35px 'Space Grotesk';color:#ff606c;letter-spacing:-.06em}.how-card h3{font-size:19px;margin:15px 0 10px}.how-card p{font-size:12px;line-height:1.85;color:#a2a4ae}.callout{margin-top:38px;border:1px solid #543b43;border-radius:13px;background:#27171d80;padding:18px 22px;color:#d9c7cd;font-size:12px;line-height:1.9}.callout b{color:#fff}
+    .faq{max-width:840px;margin:38px auto 0}.faq details{border-bottom:1px solid #30313b;padding:21px 4px}.faq summary{list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center;font-weight:800;color:#f2f2f5;cursor:pointer;font-size:14px}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:'+';color:#ff6c76;font-size:23px;font-weight:400}.faq details[open] summary:after{content:'−'}.faq p{font-size:13px;line-height:1.9;max-width:740px;margin:12px 20px 0 0;color:#a9aab6}
+    .closing{padding:70px 0 100px}.closing-panel{padding:77px 30px;text-align:center;border:1px solid #75424c;border-radius:18px;background:radial-gradient(ellipse at 50% 50%,#ae293139,#211318 58%,#121217 100%);overflow:hidden}.closing-panel h2{margin:15px auto;max-width:760px}.closing-panel .eyebrow{justify-content:center}.closing-panel p{max-width:540px;margin:0 auto 25px;font-size:14px;line-height:1.8}footer{border-top:1px solid #202129;padding:23px 0 30px}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:12px;color:#888a96}.footer-row a{color:#d1d2da}.footer-row a:hover{color:#fff}
+    dialog{width:min(685px,calc(100% - 24px));max-height:min(88vh,840px);overflow-y:auto;border:1px solid #54505b;border-radius:17px;padding:0;color:#fff;background:#16171e;box-shadow:0 40px 180px #000d}dialog::backdrop{background:#030407dc;backdrop-filter:blur(8px)}.modal-inner{padding:27px}.modal-head{display:flex;align-items:start;justify-content:space-between;gap:14px}.modal-close{background:#2b2c34;border:1px solid #41424c;border-radius:8px;color:#fff;font-size:23px;width:37px;height:37px;display:grid;place-items:center;flex:none}.modal-inner h2{font-size:clamp(27px,5vw,40px);margin:16px 0 9px}.modal-inner .eyebrow{color:#ff929a}.modal-description{line-height:1.8;font-size:14px}.modal-inner h4{font-size:14px;letter-spacing:-.015em;margin:24px 0 11px}.modal-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}.modal-list li{background:#202129;border:1px solid #353641;padding:10px 12px;border-radius:8px;color:#d4d5dd;font-size:12px}.modal-list li:before{content:'✓';color:#ff717e;margin-right:8px}.modal-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px}.modal-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #373842;padding-top:22px;margin-top:23px;flex-wrap:wrap}.modal-bottom p{font-size:11px;margin:0;max-width:240px;color:#999ba8}.modal-bottom .button{flex:1}
+    .reveal{opacity:1;transform:none}.reveal.visible{opacity:1;transform:none}
+
+    /* Precificação de lançamento: valores exibidos são informativos; cobrança sempre definida no servidor. */
+    .launch-price{margin:0 0 13px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .launch-price strong{font:700 clamp(30px,3vw,38px)/1 'Space Grotesk',sans-serif;letter-spacing:-.065em;color:#fff}
+    .launch-price small{font-size:11px;color:#a8aab4;font-weight:600}
+    .product-end .status{margin-bottom:14px}
+    .combo-offer{position:relative;isolation:isolate;margin-top:28px;padding:38px 42px;display:grid;grid-template-columns:1.15fr .75fr;align-items:center;gap:24px;overflow:hidden;border:1px solid #a34b55;border-radius:18px;background:linear-gradient(112deg,#261419 0%,#19151c 52%,#111218 100%);box-shadow:0 18px 80px #f02f4311}
+    .combo-offer:before{content:'';position:absolute;inset:-100px -130px auto auto;width:440px;height:380px;background:radial-gradient(circle,#f2414f22,transparent 67%);z-index:-1;pointer-events:none}
+    .combo-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid #ff697557;border-radius:99px;color:#ffc6cb;background:#e72e4520;padding:6px 11px;font-size:10px;font-weight:800;letter-spacing:.085em;text-transform:uppercase}
+    .combo-offer h3{font-size:clamp(30px,3.2vw,43px);line-height:1.09;letter-spacing:-.055em;margin:15px 0 12px}
+    .combo-offer p{font-size:13px;line-height:1.7;max-width:570px;margin:0 0 19px;color:#c4b9bf}
+    .combo-includes{display:flex;flex-wrap:wrap;gap:8px}
+    .combo-includes span{border:1px solid #ffffff25;border-radius:6px;padding:7px 10px;font-size:11px;color:#e5dfe3;background:#ffffff08}
+    .combo-checkout{display:flex;align-items:stretch;flex-direction:column;gap:6px;max-width:390px;width:100%;justify-self:end}
+    .combo-original{font-size:13px;color:#aba1a8}.combo-original s{text-decoration-thickness:1px}
+    .combo-price{font:700 clamp(43px,5vw,67px)/1 'Space Grotesk',sans-serif;letter-spacing:-.075em;color:#fff;margin:2px 0 5px}
+    .combo-save{color:#ff9ca4;font-weight:800;font-size:12px;margin:0 0 11px}
+    .combo-checkout .button{width:100%;font-size:14px;min-height:58px}
+    .combo-fine{font-size:11px;color:#aaa3a9;line-height:1.6;margin-top:8px;text-align:center}
+    @media(max-width:740px){.combo-offer{grid-template-columns:1fr;padding:29px 22px;gap:26px}.combo-checkout{max-width:none;justify-self:stretch}.combo-price{font-size:53px}}
+    @media(max-width:970px){.products{grid-template-columns:1fr 1fr}.product:last-child{grid-column:span 2}.product:last-child .product h3{min-height:0}.intro{display:block}.intro p{margin-top:17px;max-width:610px}.benefit-layout{gap:30px}.how{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.container{width:min(100% - 32px,1140px)}.hero{padding:69px 0 62px}.hero h1{font-size:clamp(43px,12vw,68px);margin-top:20px}.hero-desc{font-size:15px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .button{width:100%}.hero-meta{gap:8px 13px}.demo-window{margin-top:40px;border-radius:12px}.canvas{padding:26px 15px}.flow-track{min-width:690px}.flow-node{min-width:126px;max-width:126px}.window-right{display:none}.preview-foot{font-size:10px}.stack,.products,.benefit-layout,.how{grid-template-columns:1fr}.product:last-child{grid-column:auto}.section{padding:72px 0}.library{padding-top:70px}.intro{margin-bottom:27px}.intro h2{font-size:40px}.mini-stat{padding:19px 22px}.product h3{min-height:auto}.product .desc{min-height:auto}.modal-columns{grid-template-columns:1fr;gap:0}.modal-inner{padding:21px}.closing{padding:0 0 70px}.closing-panel{padding:55px 20px}.footer-row{justify-content:center;text-align:center}.modal-bottom .button{width:100%;flex:auto}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+<!-- Página propositalmente sem menu superior, navegação e logotipo. -->
+<main>
+  <section class="hero" id="inicio"><div class="container">
+    <div class="hero-copy">
+      <div class="hero-chip"><i></i> Templates n8n · Prospecção com IA</div>
+      <h1>Encontre empresas.<br>Descubra contatos.<br><em>Automatize o resto.</em></h1>
+      <p class="hero-desc">Três workflows para transformar pesquisas no Google e Google Maps em oportunidades comerciais organizadas. Menos buscas manuais, mais foco na sua próxima negociação.</p>
+      <div class="hero-actions"><a class="button red" href="#templates">Conhecer os 3 templates <span class="arr">↗</span></a><a class="button ghost" href="#como-funciona">Entenda como funciona <span class="arr">↓</span></a></div>
+      <div class="hero-meta"><span>Arquivo JSON editável</span><span>Pagamento único por fluxo</span><span>Integrações configuráveis</span></div>
+    </div>
+    <div class="demo-window reveal" aria-label="Representação simplificada de um workflow de prospecção n8n">
+      <div class="windowbar"><div class="traffic"><span></span><span></span><span></span></div><div class="window-title">prospeccao-automatizada / visão ilustrativa</div><div class="window-right">n8n · workflow</div></div>
+      <div class="canvas flow-bg"><div class="flow-track">
+        <div class="flow-node"><div class="ni">⌕</div><strong>Pesquisar empresas</strong><small>Google / Maps</small></div><div class="wire"></div>
+        <div class="flow-node"><div class="ni">◎</div><strong>Extrair contatos</strong><small>Web / APIs</small></div><div class="wire"></div>
+        <div class="flow-node"><div class="ni">✳</div><strong>Analisar com IA</strong><small>Gemini / LLM</small></div><div class="wire"></div>
+        <div class="flow-node"><div class="ni">▥</div><strong>Organizar leads</strong><small>Google Planilhas</small></div><div class="wire"></div>
+        <div class="flow-node"><div class="ni">↗</div><strong>Preparar contato</strong><small>Prospecção</small></div>
+      </div></div>
+      <div class="preview-foot"><span><span class="live">Estrutura ilustrativa</span> · fluxos reais detalhados abaixo</span><span>Pesquisa → dados → oportunidades</span></div>
+    </div>
+  </div></section>
+
+  <section class="section library" id="templates"><div class="container">
+    <div class="intro"><div><div class="eyebrow">Catálogo de automações</div><h2>Três soluções.<br><span class="accent">Uma operação mais inteligente.</span></h2></div><p>Workflows com objetivos diferentes, pensados para identificar empresas, reunir informações e ajudar na preparação da prospecção comercial.</p></div>
+    <div class="products" id="products"><article class="product reveal" data-product="0">
+    <div class="product-top"><div class="product-head"><div class="product-label">WORKFLOW <span>01</span> / N8N</div></div>
+    <div class="flow-mini" aria-label="Ilustração do fluxo: Google para Sites para Gemini para Planilha"><div class="mini-flow-content"><div class="mini-node"><div class="emoji">⌕</div><span>Google</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">▤</div><span>Sites</span></div><div class="mini-line"></div><div class="mini-node hot"><div class="emoji">✳</div><span>Gemini</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">▥</div><span>Planilha</span></div></div></div></div>
+    <div class="product-body"><div class="fine" style="margin-bottom:7px">Pesquisa e enriquecimento de empresas</div><h3>Agente de Pesquisa Comercial</h3><p class="desc">Pesquise empresas no Google por nicho, analise seus sites com Gemini, identifique formas de contato e organize resultados no Google Planilhas.</p><ul><li>Pesquisa Google por segmento e região</li><li>Análise de páginas de contato com IA</li><li>Extração de dados para Google Planilhas</li></ul><div class="tech"><span>Serper</span><span>Gemini</span><span>ScraperAPI</span><span>Sheets</span></div>
+    <div class="product-end"><div class="launch-price"><strong>R$ 19,90</strong><small>pagamento único</small></div><button class="button red checkout-button" type="button" data-checkout-index="0">Comprar template ↗</button><button class="detail-link" type="button">Ver como funciona e requisitos ↓</button></div></div>
+  </article><article class="product reveal featured" data-product="1">
+    <div class="product-top"><div class="product-head"><div class="product-label">WORKFLOW <span>02</span> / N8N</div><span class="product-star">MAIS COMPLETO EM SCORING</span></div>
+    <div class="flow-mini" aria-label="Ilustração do fluxo: Maps para Contatos para Score para Planilha"><div class="mini-flow-content"><div class="mini-node"><div class="emoji">⌖</div><span>Maps</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">◎</div><span>Contatos</span></div><div class="mini-line"></div><div class="mini-node hot"><div class="emoji">✳</div><span>Score</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">▥</div><span>Planilha</span></div></div></div></div>
+    <div class="product-body"><div class="fine" style="margin-bottom:7px">Extração, qualificação e rascunhos com IA</div><h3>Google Maps + Lead Scoring</h3><p class="desc">Encontre empresas no Google Maps, reúna contatos e perfis sociais, atribua uma pontuação de 0 a 10 e prepare mensagens de prospecção.</p><ul><li>Busca de empresas no Google Maps</li><li>Pontuação comercial de 0 a 10</li><li>Rascunhos de prospecção com IA</li></ul><div class="tech"><span>Google Maps</span><span>Serper</span><span>IA</span><span>Lead Score</span></div>
+    <div class="product-end"><div class="launch-price"><strong>R$ 29,90</strong><small>pagamento único</small></div><button class="button red checkout-button" type="button" data-checkout-index="1">Comprar template ↗</button><button class="detail-link" type="button">Ver como funciona e requisitos ↓</button></div></div>
+  </article><article class="product reveal" data-product="2">
+    <div class="product-top"><div class="product-head"><div class="product-label">WORKFLOW <span>03</span> / N8N</div></div>
+    <div class="flow-mini" aria-label="Ilustração do fluxo: Apify para Empresas para OpenAI para Contato"><div class="mini-flow-content"><div class="mini-node"><div class="emoji">⌖</div><span>Apify</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">▤</div><span>Empresas</span></div><div class="mini-line"></div><div class="mini-node hot"><div class="emoji">✳</div><span>OpenAI</span></div><div class="mini-line"></div><div class="mini-node"><div class="emoji">↗</div><span>Contato</span></div></div></div></div>
+    <div class="product-body"><div class="fine" style="margin-bottom:7px">Captura de empresas e abordagem personalizada</div><h3>Google Maps Scraper com IA</h3><p class="desc">Use o Apify para levantar empresas do Google Maps, separe contatos, gere textos de abordagem com OpenAI e complemente dados de sites via Firecrawl.</p><ul><li>Extração pelo Google Maps via Apify</li><li>Mensagens personalizadas com OpenAI</li><li>Enriquecimento de redes sociais via Firecrawl</li></ul><div class="tech"><span>Apify</span><span>Firecrawl</span><span>OpenAI</span><span>Sheets</span></div>
+    <div class="product-end"><div class="launch-price"><strong>R$ 49,90</strong><small>pagamento único</small></div><button class="button red checkout-button" type="button" data-checkout-index="2">Comprar template ↗</button><button class="detail-link" type="button">Ver como funciona e requisitos ↓</button></div></div>
+  </article></div>
+    <section class="combo-offer" aria-labelledby="combo-title" id="combo">
+      <div class="combo-copy">
+        <span class="combo-pill">✦ Oferta de lançamento · Economize R$ 19,80</span>
+        <h3 id="combo-title">O pacote completo.<br><span class="accent">As 3 automações juntas.</span></h3>
+        <p>Tenha o Agente de Pesquisa Comercial, o Google Maps Lead Scoring e o Google Maps Lead Scraper IA em uma única compra. Três workflows para adaptar à sua prospecção.</p>
+        <div class="combo-includes"><span>✓ Agente de Pesquisa Comercial</span><span>✓ Google Maps Lead Scoring</span><span>✓ Google Maps Lead Scraper IA</span></div>
+      </div>
+      <div class="combo-checkout">
+        <div class="combo-original">De <s>R$ 99,70</s></div>
+        <div class="combo-price">R$ 79,90</div>
+        <div class="combo-save">Você economiza R$ 19,80</div>
+        <button class="button red checkout-button" data-checkout-index="3" type="button" aria-label="Comprar combo com 3 automações por R$ 79,90">Quero as 3 automações ↗</button>
+        <div class="combo-fine">Pagamento único · 3 arquivos JSON<br>Acesso após confirmação do pagamento</div>
+      </div>
+    </section>
+    <div class="catalog-note"><strong>Importante:</strong> os produtos são arquivos de workflow para n8n, não um software hospedado pronto para usar. São necessárias credenciais, parametrização e validação em seu ambiente. Ao clicar em Comprar, o site solicita um checkout para o template ou combo selecionado. Os preços finais são confirmados no checkout.</div>
+  </div></section>
+
+  <section class="section separator contrast"><div class="container benefit-layout">
+    <div class="reveal"><div class="eyebrow">Menos trabalho repetitivo</div><h2>Prospecção não deveria começar <span class="accent">do zero.</span></h2><p>Pesquisar empresas uma por uma, copiar telefones, encontrar sites, localizar redes sociais e organizar planilhas toma tempo que poderia estar sendo usado para negociar.</p><p>Esses templates reúnem as etapas de pesquisa e tratamento de dados em fluxos editáveis no n8n, para você adaptar à sua rotina comercial.</p><a class="button ghost" href="#comparativo">Comparar os templates <span class="arr">↗</span></a></div>
+    <div class="benefit-list reveal"><div class="benefit"><div class="benefit-icon">⌕</div><div><strong>Pesquisa direcionada</strong><p>Busque empresas por nicho, palavras-chave e localização, conforme as integrações de cada fluxo.</p></div></div><div class="benefit"><div class="benefit-icon">◎</div><div><strong>Dados em um só lugar</strong><p>Centralize sites, telefones, e-mails e redes sociais encontrados em planilhas.</p></div></div><div class="benefit"><div class="benefit-icon">✳</div><div><strong>IA aplicada à prospecção</strong><p>Use modelos de linguagem para resumir empresas ou elaborar rascunhos de contato.</p></div></div><div class="benefit"><div class="benefit-icon">⚙</div><div><strong>Fluxos que você pode editar</strong><p>Importe, teste, ajuste regras e integre à sua operação dentro do n8n.</p></div></div></div>
+  </div></section>
+
+  <section class="section" id="comparativo"><div class="container"><div class="eyebrow">Escolha com clareza</div><h2>Qual automação é <span class="accent">para você?</span></h2><p style="max-width:680px">Cada workflow resolve uma parte diferente da pesquisa comercial. Compare antes de escolher.</p>
+    <div class="compare-wrap"><table class="compare"><thead><tr><th>O que você precisa</th><th>01 · Pesquisa comercial</th><th>02 · Maps + Lead Scoring</th><th>03 · Maps + IA</th></tr></thead><tbody>
+      <tr><td>Fonte principal</td><td>Pesquisa Google via Serper</td><td>Google Maps via Serper</td><td>Google Maps via Apify</td></tr>
+      <tr><td>Encontrar contatos</td><td class="good">Sites, páginas de contato e LinkedIn*</td><td class="good">Sites, e-mails e redes sociais</td><td class="good">Dados Apify e enriquecimento via Firecrawl</td></tr>
+      <tr><td>Uso de inteligência artificial</td><td>Gemini para interpretar páginas</td><td>Ollama/LLM para resumo e abordagem</td><td>OpenAI para rascunho de prospecção</td></tr>
+      <tr><td>Priorizar leads por pontuação</td><td>Não previsto</td><td class="good">Score de 0 a 10</td><td>Não previsto</td></tr>
+      <tr><td>Destino dos dados</td><td>Google Planilhas</td><td>Google Planilhas</td><td>Google Planilhas</td></tr>
+      <tr><td>Perfil de uso</td><td>Pesquisa empresarial detalhada</td><td>Seleção e classificação de empresas</td><td>Extração e abordagem personalizada</td></tr>
+    </tbody></table></div>
+    <p class="table-note">*A coleta do LinkedIn depende da disponibilidade do acesso e da configuração da requisição. Dados encontrados variam conforme a fonte.</p>
+  </div></section>
+
+  <section class="section separator" id="como-funciona"><div class="container"><div class="eyebrow">Como funciona a compra</div><h2>Do arquivo ao fluxo <span class="accent">em execução.</span></h2><div class="how"><div class="how-card"><div class="number">01</div><h3>Escolha</h3><p>Leia o que cada automação faz e quais serviços externos utiliza.</p></div><div class="how-card"><div class="number">02</div><h3>Adquira</h3><p>Clique em Comprar. O sistema gera um checkout para o template ou combo escolhido, com valor confirmado antes do pagamento.</p></div><div class="how-card"><div class="number">03</div><h3>Importe</h3><p>Faça a importação do arquivo JSON na sua instância do n8n.</p></div><div class="how-card"><div class="number">04</div><h3>Configure e teste</h3><p>Conecte APIs e contas, ajuste os parâmetros e valide o processamento com dados de teste.</p></div></div><div class="callout"><b>Sobre custos de operação:</b> a compra do template é única. O n8n Cloud ou servidor próprio, créditos de APIs (Serper, Apify, ScraperAPI, Firecrawl e provedores de IA) e outros serviços podem gerar cobranças independentes. Antes do uso comercial, respeite as regras das plataformas e a LGPD no tratamento de dados de contato.</div></div></section>
+
+  <section class="section separator" id="duvidas"><div class="container"><div class="eyebrow" style="justify-content:center">Dúvidas frequentes</div><h2 style="text-align:center;margin:16px auto 0">Tudo claro antes <span class="accent">de começar.</span></h2><div class="faq">
+    <details><summary>O que recebo ao comprar o combo?</summary><p>Você adquire os três workflows de uma só vez: Agente de Pesquisa Comercial, Google Maps Lead Scoring e Google Maps Lead Scraper IA, totalizando 3 arquivos JSON n8n por R$ 79,90. Acesso após a confirmação do pagamento.</p></details>
+    <details><summary>O que recebo ao comprar um template?</summary><p>Um arquivo JSON de workflow n8n correspondente ao produto adquirido (ou 3 arquivos JSON no combo). O acesso é disponibilizado após a confirmação do pagamento. Eventuais materiais extras, suporte ou tutorial devem ser confirmados no momento da compra; não estão automaticamente incluídos.</p></details>
+    <details><summary>Preciso saber programar?</summary><p>Não precisa criar o fluxo do zero, mas é necessário configurar credenciais e parâmetros, compreender integrações e testar o resultado. Algumas adaptações exigem conhecimentos técnicos.</p></details>
+    <details><summary>Os templates funcionam assim que importar?</summary><p>Não. Os três arquivos dependem de serviços externos e configurações específicas. O workflow 03, por exemplo, exige definir o ator/endpoint do Apify. O workflow 02 exige ajustar os parâmetros da pesquisa e o endpoint da IA. É importante testar antes de operar.</p></details>
+    <details><summary>Qual é a diferença entre os templates 02 e 03?</summary><p>O 02 usa Serper para pesquisar no Maps, coletar dados públicos disponíveis, pontuar leads de 0 a 10 e criar rascunhos comerciais. O 03 utiliza o Apify para extrair empresas e contatos, OpenAI para personalizar mensagens e Firecrawl em uma segunda etapa de enriquecimento.</p></details>
+    <details><summary>Preciso contratar o n8n ou pagar alguma API?</summary><p>Você precisa ter uma instalação do n8n. Dependendo da modalidade e do uso, haverá custos com hospedagem e APIs de pesquisa, extração ou IA. A compra do workflow não cobre esses serviços.</p></details>
+    <details><summary>É garantido encontrar e-mail e telefone de todas as empresas?</summary><p>Não. As informações retornadas dependem das fontes, dos sites e das APIs. Resultados podem estar incompletos, indisponíveis ou desatualizados; recomenda-se validar os dados antes de utilizá-los.</p></details>
+    <details><summary>Posso editar e personalizar o workflow?</summary><p>Sim. O formato JSON é importável e editável no n8n. As condições comerciais de uso e redistribuição devem ser definidas no momento da compra.</p></details>
+  </div></div></section>
+
+  <section class="closing"><div class="container"><div class="closing-panel reveal"><div class="eyebrow">Sua próxima automação começa aqui</div><h2>Menos pesquisa manual.<br><span class="accent">Mais tempo para vender.</span></h2><p>Escolha um workflow individual ou economize R$ 19,80 levando o combo com os três.</p><a href="#templates" class="button red">Ver templates disponíveis <span class="arr">↗</span></a></div></div></section>
+</main>
+<footer><div class="container footer-row"><span>Workflows n8n independentes. n8n é marca de seus respectivos titulares.</span><span><a href="https://www.instagram.com/victorrdrs/" target="_blank" rel="noopener noreferrer">@victorrdrs ↗</a> &nbsp; · &nbsp; <span id="year"></span></span></div></footer>
+
+<dialog id="detail-dialog" aria-labelledby="detail-title"><div class="modal-inner"><div class="modal-head"><div class="eyebrow" id="detail-kicker">Conheça o workflow</div><button class="modal-close" id="detail-close" aria-label="Fechar detalhes">×</button></div><h2 id="detail-title"></h2><p class="modal-description" id="detail-description"></p><div class="modal-columns"><div><h4>O que o fluxo faz</h4><ul class="modal-list" id="detail-features"></ul></div><div><h4>Integrações e requisitos</h4><ul class="modal-list" id="detail-requirements"></ul></div></div><div class="modal-bottom"><p>Importação e configuração necessárias. Resultados dependem das fontes e APIs.</p><button id="detail-cta" class="button red checkout-button" type="button">Comprar template ↗</button></div></div></dialog>
+<script>
+  /* ======================================================
+    CHECKOUT VIA N8N — REDIRECT NATIVO (HTTP 303)
+    O navegador envia POST por formulário, sem fetch/CORS.
+    No n8n, Respond to Webhook → Respond With: Redirect
+    e Redirect URL: URL do checkout gerado pelo gateway.
+    É recomendado HTTP 303 após POST (navega por GET).
+    Valores/links de checkout devem ser definidos no n8n.
+  ====================================================== */
+  const CHECKOUT_WEBHOOK = 'https://app.rmotorsrepasses.com.br/webhook/escolheu-template';
+  const PRODUCTS = [
+    {
+      id:'01',slug:'agente-pesquisa-comercial',file:'01_Agente_Pesquisa_Comercial_PTBR.json',title:'Agente de Pesquisa Comercial',subtitle:'Pesquisa e enriquecimento de empresas',
+      description:'Pesquise empresas no Google por nicho, analise seus sites com Gemini, identifique formas de contato e organize resultados no Google Planilhas.',
+      highlights:['Pesquisa Google por segmento e região','Análise de páginas de contato com IA','Extração de dados para Google Planilhas'],
+      features:['Pesquisa inicial no Google usando Serper','Identificação de sites e páginas de contato','Leitura de HTML usando Google Gemini','Tentativa de extração de telefones, e-mails e dados de LinkedIn','Organização de resultados no Google Planilhas','Aviso de conclusão por Gmail configurável'],
+      requirements:['Instância n8n configurada','Serper API','ScraperAPI','Google Gemini','Google Planilhas','Gmail opcional para aviso'],
+      icons:['⌕','▤','✳','▥'],labels:['Google','Sites','Gemini','Planilha'],tags:['Serper','Gemini','ScraperAPI','Sheets'],price:19.90,popular:false
+    },
+    {
+      id:'02',slug:'google-maps-lead-scoring',file:'02_Google_Maps_Lead_Scoring_PTBR.json',title:'Google Maps + Lead Scoring',subtitle:'Extração, qualificação e rascunhos com IA',
+      description:'Encontre empresas no Google Maps, reúna contatos e perfis sociais, atribua uma pontuação de 0 a 10 e prepare mensagens de prospecção.',
+      highlights:['Busca de empresas no Google Maps','Pontuação comercial de 0 a 10','Rascunhos de prospecção com IA'],
+      features:['Busca por consultas no Google Maps com Serper','Extração de telefone, site, e-mail e redes sociais encontradas','Verificação de e-mails usando API externa','Remoção de duplicatas','Pontuação de cada lead de 0 a 10','Resumo de empresa e mensagem de prospecção com LLM','Envio de resultados para Google Planilhas'],
+      requirements:['Instância n8n configurada','Serper API','Serviço de validação de e-mail','Ollama ou endpoint LLM equivalente, com ajustes técnicos','Google Planilhas','Configurar a entrada das consultas de busca'],
+      icons:['⌖','◎','✳','▥'],labels:['Maps','Contatos','Score','Planilha'],tags:['Google Maps','Serper','IA','Lead Score'],price:29.90,popular:true
+    },
+    {
+      id:'03',slug:'google-maps-lead-scraper-ia',file:'03_Google_Maps_Lead_Scraper_IA_PTBR.json',title:'Google Maps Scraper com IA',subtitle:'Captura de empresas e abordagem personalizada',
+      description:'Use o Apify para levantar empresas do Google Maps, separe contatos, gere textos de abordagem com OpenAI e complemente dados de sites via Firecrawl.',
+      highlights:['Extração pelo Google Maps via Apify','Mensagens personalizadas com OpenAI','Enriquecimento de redes sociais via Firecrawl'],
+      features:['Extração empresarial com ator do Apify','Separação de empresas com e sem contatos enriquecidos','Geração de mensagens com agente OpenAI','Organização de contatos no Google Planilhas','Segundo fluxo acionado por planilha para visitar sites','Busca complementar de perfis sociais com Firecrawl'],
+      requirements:['Instância n8n configurada','Apify e ator configurado','OpenAI API','Firecrawl API','Google Planilhas','Ajustar endpoints e credenciais de ambos os fluxos'],
+      icons:['⌖','▤','✳','↗'],labels:['Apify','Empresas','OpenAI','Contato'],tags:['Apify','Firecrawl','OpenAI','Sheets'],price:49.90,popular:false
+    }
+  ];
+  // Produto combo tratado como escolha única para criar checkout no n8n.
+  // Valor exibido na página; preço real SEMPRE definido e validado pelo backend.
+  const COMBO = {
+    id:'COMBO', slug:'combo-3-automacoes',title:'COMBO — 3 AUTOMAÇÕES',
+    file:null, files:PRODUCTS.map(p=>p.file), ids:PRODUCTS.map(p=>p.id), price:79.90
+  };
+  const CHECKOUT_PRODUCTS=[...PRODUCTS,COMBO];
+  const formatPrice=(n)=>typeof n==='number'&&n>0?n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}):null;
+  let pendingCheckout=false;
+  // Submissão como navegação normal: o navegador seguirá o Location enviado
+  // por Respond to Webhook (Redirect), mesmo entre domínios diferentes.
+  function startCheckout(index){
+    const product=CHECKOUT_PRODUCTS[index];
+    if(!product||pendingCheckout)return;
+    pendingCheckout=true;
+    const buttons=[...document.querySelectorAll('.checkout-button')];
+    buttons.forEach(button=>{
+      button.dataset.originalLabel=button.textContent;
+      button.disabled=true;
+      if(Number(button.dataset.checkoutIndex)===index){
+        button.textContent='Abrindo pagamento…';
+      }
+    });
+    const payload={
+      template_id:product.id,
+      template_slug:product.slug,
+      template_nome:product.title,
+      template_arquivo:product.file || '',
+      origem:'landing-page'
+    };
+    if(product.id==='COMBO'){
+      // Campos do formulário são textos; no n8n use JSON.parse se precisar
+      // das listas, ou identifique o combo apenas por template_slug.
+      payload.template_ids=JSON.stringify(product.ids);
+      payload.template_arquivos=JSON.stringify(product.files);
+    }
+    const form=document.createElement('form');
+    form.method='POST';
+    form.action=CHECKOUT_WEBHOOK;
+    form.target='_self';
+    form.style.display='none';
+    form.acceptCharset='UTF-8';
+    Object.entries(payload).forEach(([name,value])=>{
+      const input=document.createElement('input');
+      input.type='hidden';
+      input.name=name;
+      input.value=String(value);
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+  }
+  // Ao voltar do checkout, liberar os botões novamente.
+  window.addEventListener('pageshow',()=>{
+    pendingCheckout=false;
+    document.querySelectorAll('.checkout-button').forEach(button=>{
+      button.disabled=false;
+      if(button.dataset.originalLabel){
+        button.textContent=button.dataset.originalLabel;
+        delete button.dataset.originalLabel;
+      }
+    });
+  });
+  const root=document.getElementById('products');
+  if(!root.children.length) PRODUCTS.forEach((p,index)=>{
+    const card=document.createElement('article');card.className='product reveal'+(p.popular?' featured':'');
+    const head=document.createElement('div');head.className='product-top';
+    const headrow=document.createElement('div');headrow.className='product-head';
+    const label=document.createElement('div');label.className='product-label';label.innerHTML='WORKFLOW <span>'+p.id+'</span> / N8N';headrow.appendChild(label);
+    if(p.popular){const tag=document.createElement('span');tag.className='product-star';tag.textContent='MAIS COMPLETO EM SCORING';headrow.appendChild(tag)}
+    head.appendChild(headrow);
+    const diagram=document.createElement('div');diagram.className='flow-mini';diagram.setAttribute('aria-label','Ilustração do fluxo: '+p.labels.join(' para '));
+    const content=document.createElement('div');content.className='mini-flow-content';p.icons.forEach((icon,i)=>{if(i){const wire=document.createElement('div');wire.className='mini-line';content.appendChild(wire)}const n=document.createElement('div');n.className='mini-node'+(i===2?' hot':'');const e=document.createElement('div');e.className='emoji';e.textContent=icon;const s=document.createElement('span');s.textContent=p.labels[i];n.append(e,s);content.appendChild(n)});diagram.appendChild(content);head.appendChild(diagram);
+    const body=document.createElement('div');body.className='product-body';const sub=document.createElement('div');sub.className='fine';sub.style.marginBottom='7px';sub.textContent=p.subtitle;const title=document.createElement('h3');title.textContent=p.title;const desc=document.createElement('p');desc.className='desc';desc.textContent=p.description;const list=document.createElement('ul');p.highlights.forEach(f=>{const item=document.createElement('li');item.textContent=f;list.appendChild(item)});
+    const tech=document.createElement('div');tech.className='tech';p.tags.forEach(t=>{const tag=document.createElement('span');tag.textContent=t;tech.appendChild(tag)});
+    const end=document.createElement('div');end.className='product-end';const priceEl=document.createElement('div');priceEl.className='launch-price';const amount=document.createElement('strong');amount.textContent=formatPrice(p.price);const priceNote=document.createElement('small');priceNote.textContent='pagamento único';priceEl.append(amount,priceNote);
+    const buy=document.createElement('button');buy.type='button';buy.className='button red checkout-button';buy.dataset.checkoutIndex=index;buy.textContent='Comprar template ↗';buy.setAttribute('aria-label','Comprar template: '+p.title);
+    const details=document.createElement('button');details.className='detail-link';details.type='button';details.textContent='Ver como funciona e requisitos ↓';details.addEventListener('click',()=>openDetails(index));end.append(priceEl,buy,details);body.append(sub,title,desc,list,tech,end);card.append(head,body);root.appendChild(card);
+  });
+  // Enriquecer os cards HTML já renderizados, mantendo tudo visível sem JavaScript.
+  document.querySelectorAll('[data-product]').forEach(card => {
+    const idx=Number(card.dataset.product), p=PRODUCTS[idx];
+    const buy=card.querySelector('.product-end .button');
+    buy.dataset.checkoutIndex=idx;
+    buy.setAttribute('aria-label','Comprar template: '+p.title);
+    const price=card.querySelector('.product-end .launch-price strong');
+    if(price) price.textContent=formatPrice(p.price);
+    card.querySelector('.detail-link').addEventListener('click',()=>openDetails(idx));
+  });
+  const dialog=document.getElementById('detail-dialog');let lastFocus=null;
+  function openDetails(index){const p=PRODUCTS[index];lastFocus=document.activeElement;document.getElementById('detail-kicker').textContent='WORKFLOW '+p.id+' · N8N';document.getElementById('detail-title').textContent=p.title;document.getElementById('detail-description').textContent=p.description;[['detail-features',p.features],['detail-requirements',p.requirements]].forEach(([id,data])=>{const el=document.getElementById(id);el.replaceChildren();data.forEach(v=>{const li=document.createElement('li');li.textContent=v;el.appendChild(li)})});const a=document.getElementById('detail-cta');a.dataset.checkoutIndex=index;a.textContent='Comprar por '+formatPrice(p.price)+' ↗';dialog.showModal()}
+  function closeDialog(){dialog.close();if(lastFocus?.focus)lastFocus.focus()}
+  document.querySelectorAll('.checkout-button').forEach(button=>{
+    button.addEventListener('click',()=>startCheckout(Number(button.dataset.checkoutIndex)));
+  });
+  document.getElementById('detail-close').addEventListener('click',closeDialog);dialog.addEventListener('click',e=>{if(e.target===dialog)closeDialog()});
+  document.getElementById('year').textContent=String(new Date().getFullYear());
+  if('IntersectionObserver' in window){const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.07});document.querySelectorAll('.reveal').forEach(e=>obs.observe(e))}else{document.querySelectorAll('.reveal').forEach(e=>e.classList.add('visible'))}
+</script>
+</body>
+</html>
